@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>szbh</title>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" type="text/css" href="css/h2v.css">
+	<!--[if lt IE 9]>
+	<script src="//cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<link rel="shortcut icon" href="">
+	<style type="text/css">
+	.wrap {
+		width: auto;
+		padding: 10px;
+		background: #EEE;
+		overflow: auto;
+	}
+	.box {
+		width: 190px;
+		margin: 5px;
+		padding: 10px;
+		float: left;
+		background: #424242;
+		color: #FFF;
+		display: inline;  /* IE6 fix */
+	}
+	</style>
+</head>
+<body>
+<div id="wrap">
+
+</div>
+<!--/ #contents-->
+<!-- SCRIPTS -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$.getJSON("./js/sz.json", function(data){
+			var arr = [];
+			var dataLen = data.length;
+			//ここから先でdataに含まれるcontentsを格納する
+			for (var i = 0; i<dataLen; i++) {
+				arr.push.apply(arr, data[i].contents);
+				console.dir(arr);
+			}
+			//格納したコンテンツを羅列する
+			var arrLen = arr.length;
+			console.log(arrLen)
+			for(var n = 0; n<arrLen; n++){
+				$("#wrap").append($("<div>").attr({"class":"box"}).text(arr[n].sentence));
+				console.dir(arr[n].sentence);
+			}
+
+		});
+
+	});
+	$(function(){  
+        $('#wrap').masonry();   
+    })  
+</script>
+<!--script type="text/javascript" src="js/h2v-min.js" charset="utf-8"></script>
+	<script type="text/javascript">
+	$(function(){
+		$('#wrap').masonry({
+			itemSelector:'.box',
+			isRTL:true,
+			isAnimated: true,
+			isFitWidth: true
+		});
+	})
+    var params = { 'wrap' : { 
+    		'fontsize' : '13px',
+    		'bar':false,
+    		'showcredit':false,
+    		'splash':false,
+    	}} ;
+    h2vconvert.init( params );
+	</script-->
+</body>
+</html>
